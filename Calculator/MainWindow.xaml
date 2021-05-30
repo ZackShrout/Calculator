@@ -108,7 +108,7 @@
                 Grid.ColumnSpan="2"/>
         <Button x:Name="dotButton" Content="."
                 Click="DotButton_Click"
-                Style="{StaticResource numberButtonStyle}"
+                Style="{StaticResource baseButtonStyle}"
                 Grid.Row="5"
                 Grid.Column="2"/>
         <Button x:Name="equalsButton" Content="="

@@ -20,37 +20,71 @@ namespace Calculator
     /// </summary>
     public partial class MainWindow : Window
     {
-        double lastNumber, result;
+        double operand1, operand2, result;
+        bool hasDoneEquals;
         Operator selectedOperator;
 
 
         public MainWindow()
         {
             InitializeComponent();
+            hasDoneEquals = false;
         }
 
         private void EqualsButton_Click(object sender, RoutedEventArgs e)
         {
-            if (double.TryParse(resultLabel.Content.ToString(), out double newNumber))
+            if (!hasDoneEquals)
+            {
+                SingleOperation();
+            }
+            else
+            {
+                RepeatedOperation();
+            }
+
+            resultLabel.Content = result.ToString();
+        }
+
+        private void SingleOperation()
+        {
+            if (double.TryParse(resultLabel.Content.ToString(), out operand2))
             {
                 switch (selectedOperator)
                 {
                     case Operator.Addition:
-                        result = Math.Add(lastNumber, newNumber);
+                        result = Math.Add(operand1, operand2);
                         break;
                     case Operator.Subtraction:
-                        result = Math.Subtract(lastNumber, newNumber);
+                        result = Math.Subtract(operand1, operand2);
                         break;
                     case Operator.Multiplication:
-                        result = Math.Multiply(lastNumber, newNumber);
+                        result = Math.Multiply(operand1, operand2);
                         break;
                     case Operator.Division:
-                        result = Math.Divide(lastNumber, newNumber);
+                        result = Math.Divide(operand1, operand2);
                         break;
                 }
 
-                lastNumber = newNumber;
-                resultLabel.Content = result.ToString();
+                hasDoneEquals = true;
+            }
+        }
+
+        private void RepeatedOperation()
+        {
+            switch (selectedOperator)
+            {
+                case Operator.Addition:
+                    result = Math.Add(result, operand2);
+                    break;
+                case Operator.Subtraction:
+                    result = Math.Subtract(result, operand2);
+                    break;
+                case Operator.Multiplication:
+                    result = Math.Multiply(result, operand2);
+                    break;
+                case Operator.Division:
+                    result = Math.Divide(result, operand2);
+                    break;
             }
         }
 
@@ -60,9 +94,9 @@ namespace Calculator
             {
                 tempNumber /= 100;
 
-                if (lastNumber != 0)
+                if (operand1 != 0)
                 {
-                    tempNumber *= lastNumber;
+                    tempNumber *= operand1;
                 }
 
                 resultLabel.Content = tempNumber.ToString();
@@ -71,7 +105,7 @@ namespace Calculator
 
         private void SignButton_Click(object sender, RoutedEventArgs e)
         {
-            if (double.TryParse(resultLabel.Content.ToString(), out lastNumber))
+            if (double.TryParse(resultLabel.Content.ToString(), out double lastNumber))
             {
                 lastNumber *= -1;
                 resultLabel.Content = lastNumber.ToString();
@@ -89,13 +123,15 @@ namespace Calculator
         private void AcButton_Click(object sender, RoutedEventArgs e)
         {
             resultLabel.Content = "0";
-            lastNumber = 0;
+            hasDoneEquals = false;
+            operand1 = 0;
+            operand2 = 0;
             result = 0;
         }
 
         private void OperatorButton_Click(object sender, RoutedEventArgs e)
         {
-            if (double.TryParse(resultLabel.Content.ToString(), out lastNumber))
+            if (double.TryParse(resultLabel.Content.ToString(), out operand1))
             {
                 resultLabel.Content = "0";
             }
@@ -122,9 +158,10 @@ namespace Calculator
         {
             int selectedValue = int.Parse((sender as Button).Content.ToString());
 
-            if (resultLabel.Content.ToString() == "0")
+            if (resultLabel.Content.ToString() == "0" || hasDoneEquals)
             {
                 resultLabel.Content = $"{selectedValue}";
+                hasDoneEquals = false;
             }
             else
             {
