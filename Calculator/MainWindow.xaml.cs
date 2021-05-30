@@ -27,18 +27,6 @@ namespace Calculator
         public MainWindow()
         {
             InitializeComponent();
-
-            signButton.Click += SignButton_Click;
-            percentButton.Click += PercentButton_Click;
-            nineButton.Click += NumberButton_Click;
-            eightButton.Click += NumberButton_Click;
-            sixButton.Click += NumberButton_Click;
-            fiveButton.Click += NumberButton_Click;
-            fourButton.Click += NumberButton_Click;
-            threeButton.Click += NumberButton_Click;
-            twoButton.Click += NumberButton_Click;
-            oneButton.Click += NumberButton_Click;
-            zeroButton.Click += NumberButton_Click;
         }
 
         private void EqualsButton_Click(object sender, RoutedEventArgs e)
