@@ -43,9 +43,7 @@ namespace Calculator
 
         private void EqualsButton_Click(object sender, RoutedEventArgs e)
         {
-            double newNumber;
-
-            if (double.TryParse(resultLabel.Content.ToString(), out newNumber))
+            if (double.TryParse(resultLabel.Content.ToString(), out double newNumber))
             {
                 switch (selectedOperator)
                 {
@@ -63,15 +61,14 @@ namespace Calculator
                         break;
                 }
 
+                lastNumber = newNumber;
                 resultLabel.Content = result.ToString();
             }
         }
 
         private void PercentButton_Click(object sender, RoutedEventArgs e)
         {
-            double tempNumber;
-            
-            if (double.TryParse(resultLabel.Content.ToString(), out tempNumber))
+            if (double.TryParse(resultLabel.Content.ToString(), out double tempNumber))
             {
                 tempNumber /= 100;
 
