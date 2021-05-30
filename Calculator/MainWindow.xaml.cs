@@ -20,10 +20,15 @@ namespace Calculator
     /// </summary>
     public partial class MainWindow : Window
     {
+        double lastNumber;
+        double result;
+        
         public MainWindow()
         {
             InitializeComponent();
 
+            signButton.Click += SignButton_Click;
+            percentButton.Click += PercentButton_Click;
             nineButton.Click += NineButton_Click;
             eightButton.Click += EightButton_Click;
             sixButton.Click += SixButton_Click;
@@ -33,6 +38,24 @@ namespace Calculator
             twoButton.Click += TwoButton_Click;
             oneButton.Click += OneButton_Click;
             zeroButton.Click += ZeroButton_Click;
+        }
+
+        private void PercentButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (double.TryParse(resultLabel.Content.ToString(), out lastNumber))
+            {
+                lastNumber /= 100;
+                resultLabel.Content = lastNumber.ToString();
+            }
+        }
+
+        private void SignButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (double.TryParse(resultLabel.Content.ToString(), out lastNumber))
+            {
+                lastNumber *= -1;
+                resultLabel.Content = lastNumber.ToString();
+            }
         }
 
         private void ZeroButton_Click(object sender, RoutedEventArgs e)
@@ -115,6 +138,18 @@ namespace Calculator
             }
         }
 
+        private void SevenButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (resultLabel.Content.ToString() == "0")
+            {
+                resultLabel.Content = "7";
+            }
+            else
+            {
+                resultLabel.Content = $"{resultLabel.Content}7";
+            }
+        }
+
         private void EightButton_Click(object sender, RoutedEventArgs e)
         {
             if (resultLabel.Content.ToString() == "0")
@@ -136,18 +171,6 @@ namespace Calculator
             else
             {
                 resultLabel.Content = $"{resultLabel.Content}9";
-            }
-        }
-
-        private void SevenButton_Click(object sender, RoutedEventArgs e)
-        {
-            if (resultLabel.Content.ToString() == "0")
-            {
-                resultLabel.Content = "7";
-            }
-            else
-            {
-                resultLabel.Content = $"{resultLabel.Content}7";
             }
         }
 

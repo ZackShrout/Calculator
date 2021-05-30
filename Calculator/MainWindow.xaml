@@ -30,7 +30,7 @@
                 Margin="5"
                 Click="AcButton_Click"
                 Grid.Row="1"/>
-        <Button x:Name="plusMinusButton" Content="+/-"
+        <Button x:Name="signButton" Content="+/-"
                 Margin="5"
                 Grid.Row="1"
                 Grid.Column="1"/>
