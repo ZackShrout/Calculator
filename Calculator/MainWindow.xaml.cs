@@ -21,19 +21,19 @@ namespace Calculator
     public partial class MainWindow : Window
     {
         double operand1, operand2, result;
-        bool hasDoneEquals;
+        bool isDirty;
         Operator selectedOperator;
 
 
         public MainWindow()
         {
             InitializeComponent();
-            hasDoneEquals = false;
+            isDirty = false;
         }
 
         private void EqualsButton_Click(object sender, RoutedEventArgs e)
         {
-            if (!hasDoneEquals)
+            if (!isDirty)
             {
                 SingleOperation();
             }
@@ -41,7 +41,6 @@ namespace Calculator
             {
                 RepeatedOperation();
             }
-
             resultLabel.Content = result.ToString();
         }
 
@@ -64,25 +63,30 @@ namespace Calculator
                         result = Math.Divide(operand1, operand2);
                         break;
                 }
-
-                hasDoneEquals = true;
+                equationLabel.Content = $"{equationLabel.Content} {operand2} =";
+                isDirty = true;
             }
         }
 
         private void RepeatedOperation()
         {
+            equationLabel.Content = $"{result}";
             switch (selectedOperator)
             {
                 case Operator.Addition:
+                    equationLabel.Content = $"{equationLabel.Content} + {operand2} =";
                     result = Math.Add(result, operand2);
                     break;
                 case Operator.Subtraction:
+                    equationLabel.Content = $"{equationLabel.Content} - {operand2} =";
                     result = Math.Subtract(result, operand2);
                     break;
                 case Operator.Multiplication:
+                    equationLabel.Content = $"{equationLabel.Content} x {operand2} =";
                     result = Math.Multiply(result, operand2);
                     break;
                 case Operator.Division:
+                    equationLabel.Content = $"{equationLabel.Content} / {operand2} =";
                     result = Math.Divide(result, operand2);
                     break;
             }
@@ -123,7 +127,8 @@ namespace Calculator
         private void AcButton_Click(object sender, RoutedEventArgs e)
         {
             resultLabel.Content = "0";
-            hasDoneEquals = false;
+            equationLabel.Content = "";
+            isDirty = false;
             operand1 = 0;
             operand2 = 0;
             result = 0;
@@ -133,24 +138,29 @@ namespace Calculator
         {
             if (double.TryParse(resultLabel.Content.ToString(), out operand1))
             {
+                equationLabel.Content = operand1.ToString();
                 resultLabel.Content = "0";
             }
 
             if (sender == plusButton)
             {
                 selectedOperator = Operator.Addition;
+                equationLabel.Content = $"{equationLabel.Content} +";
             }
             if (sender == minusButton)
             {
                 selectedOperator = Operator.Subtraction;
+                equationLabel.Content = $"{equationLabel.Content} -";
             }
             if (sender == multiplyButton)
             {
                 selectedOperator = Operator.Multiplication;
+                equationLabel.Content = $"{equationLabel.Content} x";
             }
             if (sender == divideButton)
             {
                 selectedOperator = Operator.Division;
+                equationLabel.Content = $"{equationLabel.Content} /";
             }
         }
 
@@ -158,10 +168,14 @@ namespace Calculator
         {
             int selectedValue = int.Parse((sender as Button).Content.ToString());
 
-            if (resultLabel.Content.ToString() == "0" || hasDoneEquals)
-            {
+            if (resultLabel.Content.ToString() == "0" || isDirty)
+            {  
+                if (isDirty)
+                {
+                    isDirty = false;
+                    equationLabel.Content = "";
+                }
                 resultLabel.Content = $"{selectedValue}";
-                hasDoneEquals = false;
             }
             else
             {
