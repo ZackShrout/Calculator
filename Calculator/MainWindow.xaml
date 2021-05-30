@@ -54,7 +54,7 @@
                 Style="{StaticResource numberButtonStyle}"
                 Grid.Row="2"
                 Grid.Column="2"/>
-        <Button x:Name="multiplyButton" Content="X"
+        <Button x:Name="multiplyButton" Content="x"
                 Style="{StaticResource operatorButtonStyle}"
                 Click="OperatorButton_Click"
                 Grid.Row="2"
