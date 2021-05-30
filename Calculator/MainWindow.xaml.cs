@@ -24,7 +24,136 @@ namespace Calculator
         {
             InitializeComponent();
 
-            resultLabel.Content = "2389";
+            nineButton.Click += NineButton_Click;
+            eightButton.Click += EightButton_Click;
+            sixButton.Click += SixButton_Click;
+            fiveButton.Click += FiveButton_Click;
+            fourButton.Click += FourButton_Click;
+            threeButton.Click += ThreeButton_Click;
+            twoButton.Click += TwoButton_Click;
+            oneButton.Click += OneButton_Click;
+            zeroButton.Click += ZeroButton_Click;
+        }
+
+        private void ZeroButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (resultLabel.Content.ToString() != "0")
+            {
+                resultLabel.Content = $"{resultLabel.Content}0";
+            }
+        }
+
+        private void OneButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (resultLabel.Content.ToString() == "0")
+            {
+                resultLabel.Content = "1";
+            }
+            else
+            {
+                resultLabel.Content = $"{resultLabel.Content}1";
+            }
+        }
+
+        private void TwoButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (resultLabel.Content.ToString() == "0")
+            {
+                resultLabel.Content = "2";
+            }
+            else
+            {
+                resultLabel.Content = $"{resultLabel.Content}2";
+            }
+        }
+
+        private void ThreeButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (resultLabel.Content.ToString() == "0")
+            {
+                resultLabel.Content = "3";
+            }
+            else
+            {
+                resultLabel.Content = $"{resultLabel.Content}3";
+            }
+        }
+
+        private void FourButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (resultLabel.Content.ToString() == "0")
+            {
+                resultLabel.Content = "4";
+            }
+            else
+            {
+                resultLabel.Content = $"{resultLabel.Content}4";
+            }
+        }
+
+        private void FiveButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (resultLabel.Content.ToString() == "0")
+            {
+                resultLabel.Content = "5";
+            }
+            else
+            {
+                resultLabel.Content = $"{resultLabel.Content}5";
+            }
+        }
+
+        private void SixButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (resultLabel.Content.ToString() == "0")
+            {
+                resultLabel.Content = "6";
+            }
+            else
+            {
+                resultLabel.Content = $"{resultLabel.Content}6";
+            }
+        }
+
+        private void EightButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (resultLabel.Content.ToString() == "0")
+            {
+                resultLabel.Content = "8";
+            }
+            else
+            {
+                resultLabel.Content = $"{resultLabel.Content}8";
+            }
+        }
+
+        private void NineButton_Click(object sender, RoutedEventArgs e)
+        {
+            if(resultLabel.Content.ToString() == "0")
+            {
+                resultLabel.Content = "9";
+            }
+            else
+            {
+                resultLabel.Content = $"{resultLabel.Content}9";
+            }
+        }
+
+        private void SevenButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (resultLabel.Content.ToString() == "0")
+            {
+                resultLabel.Content = "7";
+            }
+            else
+            {
+                resultLabel.Content = $"{resultLabel.Content}7";
+            }
+        }
+
+        private void AcButton_Click(object sender, RoutedEventArgs e)
+        {
+            resultLabel.Content = "0";
         }
     }
 }
